@@ -1,0 +1,27 @@
+class Solution {
+    HashSet<Integer> set;
+    public int findSecondMinimumValue(TreeNode root) {
+        set = new HashSet<>();
+        inorder(root);
+        ArrayList<Integer> list = new ArrayList<>(set);
+        return helper(list);
+    }
+    public void inorder(TreeNode root){
+        if(root == null){
+            return;
+        }
+        inorder(root.left);
+        set.add(root.val);
+        inorder(root.right);
+    }
+    public int helper(ArrayList<Integer> list){
+        if (list.size() == 0){
+            return -1;
+        }
+        if(list.size() == 1){
+            return -1;
+        }
+        Collections.sort(list);
+        return list.get(1);
+    }
+}
